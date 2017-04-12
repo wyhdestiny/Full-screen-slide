@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title></title>
+	</head>
+
+	<body>
+		<div class="all">
+			<ul>
+				<li class="active">
+					<div>
+						<p>
+							<img class="one-1" src="img/roll.png" alt="" />
+							<img class="one-2" src="img/people.png" alt="" />
+							<img class="one-3" src="img/phone.png" alt="" />
+							<img class="one-4" src="img/hand.png" alt="" />
+						</p>
+					</div>
+					<div class="one-5">
+						<img src="img/logo.png" alt="" />
+						<header>您掌上的志愿填报专家</header>
+						<p>
+							<a href="">安卓版</a>
+							<a href="">苹果版</a>
+						</p>
+						<img class="one-6" src="img/QRcode.png" alt="" />
+						<footer class="one-6">手机扫码下载掌上高考app</footer>
+					</div>
+				</li>
+				<li>
+					<div class="two-1">
+						<p>掌上高考</p>
+						<p>估分选大学+查学校+查专业</p>
+						<p>来源于官方机构和高校的数百万<br />条权威高考数据</p>
+					</div>
+					<div class="two-2">
+						<img src="img/page2-img.png" alt="" />
+					</div>
+				</li>
+				<li>
+					<div class="three-1">
+						<img src="img/page3-img.png" alt="" />
+					</div>
+					<div class="three-2">
+						<p>高考头条</p>
+						<p>新鲜的热点资讯</p>
+						<p>报考、院校、专业、政策，让您不错过<br />每一个高考热点</p>
+					</div>
+				</li>
+				<li>
+					<div class="four-1">
+						<p>专家<span>答疑</span></p>
+						<p>数百位专家免费在线答疑</p>
+						<p>志愿填报、高考专业、学习经验、<br />心理辅导，全方位助力高考</p>
+					</div>
+					<div class="four-2">
+						<img src="img/page4-img.png" alt="" />
+					</div>
+				</li>
+				<li>
+					<div class="five">
+						<p>志愿填报</p>
+						<p>一起找个靠谱的</p>
+						<img src="img/page5-img.png" alt="" />
+						<img src="img/QRcode.png" alt="" />
+						<span>手机扫码下载掌上高考app</span>
+					</div>
+				</li>
+			</ul>
+			<div class="two">
+				<i date-url="0"></i>
+				<i date-url="-1"></i>
+				<i date-url="-2"></i>
+				<i date-url="-3"></i>
+				<i date-url="-4"></i>
+			</div>
+		</div>
+		<script type="text/javascript">
+			//判断是否为火狐浏览器
+			var isFirefox = typeof document.body.style.MozUserSelect != 'undefined',
+				now = 0,
+				active = true,
+				all = document.getElementsByTagName('ul')[0],
+				obj = all.getElementsByTagName('li'),
+				cri = document.getElementsByClassName('two')[0];
+			//绑定滚轮事件和点击事件
+			window.addEventListener(isFirefox ? 'DOMMouseScroll' : "mousewheel", fn, false);
+			cri.addEventListener('click',fn2,false);
+			function fn(e) {//滚轮触发函数
+				e = e || event;
+				a = e.wheelDelta ? e.wheelDelta / 120 : -(e.detail % 3 == 0 ? e.detail / 3 : e.detail);
+				if (active) {
+					active = false;
+					setTimeout(one, 1000);
+					two(a);
+				}
+			}
+
+			function one() {//滚轮开关
+				active = true;
+			}
+
+			function two(a) { //加载触发函数
+				now += a;
+				if (now < -4) {
+					now = -4;
+				} else if (now > 0) {
+					now = 0;
+				}
+				all.style.top = (now * 100) + "vh";
+				var now1 = Math.abs(now);
+				for (var i = 0, len = obj.length; i <= len - 1; i++) {
+					if (i == now1) {
+						obj[i].className = "active";
+					} else {
+						obj[i].className = "ac";
+					}
+				}
+			}
+			two(0);
+			cri.addEventListener('click', fn2, false);
+
+			function fn2(e) {
+				var num = e.target, 
+					str = num.getAttribute('date-url');
+				now = parseInt(str);
+				two(0);//初始化
+			}
+		</script>
+	</body>
+
+</html>
